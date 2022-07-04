@@ -1,3 +1,4 @@
 module.exports = {
-    userService:require('../services/user.service')
+    userService:require('./user.service'),
+    passwordService:require('./password.servise')
 }

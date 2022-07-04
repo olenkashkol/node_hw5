@@ -1,29 +1,37 @@
-const {CustomError}=require('../errors/CustomError')
+const {CustomError}=require('../errors')
+const {userValidator} = require("../validators");
 
 module.exports = {
     isUserPresent: () => {
 
     },
-    isUserValidForCreate: (req,res,next) => {
+
+    isUserValidForCreate: async (req,res,next) => {
     try{
-        const {name,age,email,password}=req.body
-        if(!name||name.length<2){
-            return next(new CustomError('Set valid name'))
+       const {error,value}=userValidator.newUserValidator.validate(req.body)
+
+        if(error){
+            return next (new CustomError(error.details[0].message))
         }
-        if(!age||!Number.isInteger(age)||age<18){
-            return next(new CustomError('Set valid age'))
-        }
-        if(!email||!email.includes('@')){
-            return next(new CustomError('Set valid email'))
-        }
-        if(!password||name.password<8){
-            return next(new CustomError('Set valid password'))
-        }
+        req.body=value
         next()
     } catch (e) {
         next(e)
     }
+    },
 
+    isUserValidForUpdate: async (req,res,next) => {
+        try{
+            const {error,value}=userValidator.updateValidator.validate(req.body)
 
-    }
+            if(error){
+                return next (new CustomError(error.details[0].message))
+            }
+            req.body=value
+            next()
+        } catch (e) {
+            next(e)
+        }
+    },
+
 }
