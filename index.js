@@ -3,8 +3,7 @@ const mongoose = require('mongoose')
 
 const configs = require("./configs/configs")
 const {userRouter} = require("./routers")
-
-mongoose.connect(configs.MONGO_URL)
+mongoose.connect(configs.MONGO_URL, { useUnifiedTopology: true })
 
 const app = express()
 app.use(express.json())
@@ -24,7 +23,7 @@ app.use((err,req,res,next)=>{
         })
 })
 
-app.listen(configs.PORT, () => {
+app.listen(configs.PORT, async () => {
     console.log(`Started on port ${configs.PORT}`)
 })
 
