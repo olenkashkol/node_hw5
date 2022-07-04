@@ -1,14 +1,14 @@
 const userRouter = require('express').Router()
 
 const {userController} = require("../controllers");
-const {userMiddleware} = require("../middlewares");
+const {userMiddleware, commonMiddleware} = require("../middlewares");
 
 userRouter.get('/', userController.findUsers)
 
 userRouter.post('/', userMiddleware.isUserValidForCreate,userController.createUser)
 
-router.get('/:id',)
-router.put('/:id',)
-router.delete('/:id',)
+userRouter.get('/:id',commonMiddleware.isIdValid,userMiddleware.isUserPresent,userController.getUserById)
+userRouter.put('/:id',commonMiddleware.isIdValid,)
+userRouter.delete('/:id',commonMiddleware.isIdValid,)
 
 module.exports = userRouter

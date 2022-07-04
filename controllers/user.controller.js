@@ -18,5 +18,14 @@ module.exports = {
         } catch (e) {
             next(e)
         }
-    }
+    },
+
+    getUserById: async (req, res, next) => {
+        try {
+            const {user}=req
+            res.json(user)
+        } catch (e) {
+            next(e)
+        }
+    },
 }
