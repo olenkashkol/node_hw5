@@ -1,3 +1,4 @@
 module.exports = {
-    User:require('./User')
+    Oauth:require('./Oauth'),
+    User:require('./User'),
 }

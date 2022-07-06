@@ -2,14 +2,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const configs = require("./configs/configs")
-const {userRouter} = require("./routers")
+const {userRouter,authRouter} = require("./routers")
 mongoose.connect(configs.MONGO_URL, { useUnifiedTopology: true })
 
 const app = express()
 app.use(express.json())
 
 app.use('/users', userRouter)
-
+app.use('/auth', authRouter)
 app.use('*', (req, res) => {
     res.status(404).json('Router not found')
 })

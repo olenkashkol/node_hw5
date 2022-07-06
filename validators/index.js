@@ -1,3 +1,5 @@
 module.exports = {
-    userValidator:require('./user.validator')
+    authValidator:require('./auth.validator'),
+    userValidator:require('./user.validator'),
+    queryValidator:require('./query.validator')
 }

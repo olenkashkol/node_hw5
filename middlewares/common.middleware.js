@@ -10,7 +10,6 @@ module.exports = {
             if (!Types.ObjectId.isValid(id)) {
                 return next(new CustomError('Not found id'))
             }
-
             next()
         } catch (e) {
             next(e)
